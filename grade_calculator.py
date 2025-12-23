@@ -26,21 +26,36 @@ if __name__ == "__main__":
 
     script_name = sys.argv[0]
 
-    if len(sys.argv) > 1:
-        marks = list(map(float, sys.argv[1:]))
-        print("User provided marks:")
+    # Expected format:
+    # python grade_array.py Name Department Semester m1 m2 m3 ...
+    if len(sys.argv) > 4:
+        name = sys.argv[1]
+        department = sys.argv[2]
+        semester = sys.argv[3]
+        marks = list(map(float, sys.argv[4:]))
+
+        print("User provided student details and marks:")
     else:
+        name = "DefaultName"
+        department = "DefaultDept"
+        semester = "1"
         marks = [50, 60, 70, 80, 90]
-        print("No input given - using default marks:")
+
+        print("No input given - using default values:")
 
     total = sum(marks)
     average = calculate_average(marks)
     grade = assign_grade(average)
 
+    print("\n========== Student Result ==========")
     print("Script Name:", script_name)
+    print("Name:", name)
+    print("Department:", department)
+    print("Semester:", semester)
     print("Marks:", marks)
     print("Total Marks:", total)
     print("Average Marks:", average)
     print("Maximum Marks:", max(marks))
     print("Minimum Marks:", min(marks))
     print("Grade:", grade)
+    print("===================================")
