@@ -1,3 +1,6 @@
+import sys
+
+
 def calculate_average(marks):
     if len(marks) == 0:
         return 0
@@ -19,29 +22,25 @@ def assign_grade(avg):
         return "F"
 
 
-def get_student_result(marks):
-    avg = calculate_average(marks)
-    grade = assign_grade(avg)
-    return avg, grade
-
-
 if __name__ == "__main__":
-    name = input("Enter student name: ")
-    department = input("Enter department: ")
-    semester = input("Enter semester: ")
 
-    marks = []
-    n = int(input("Enter number of subjects: "))
+    script_name = sys.argv[0]
 
-    for i in range(n):
-        marks.append(int(input(f"Enter marks for subject {i+1}: ")))
+    if len(sys.argv) > 1:
+        marks = list(map(float, sys.argv[1:]))
+        print("User provided marks:")
+    else:
+        marks = [50, 60, 70, 80, 90]
+        print("No input given - using default marks:")
 
-    avg, grade = get_student_result(marks)
+    total = sum(marks)
+    average = calculate_average(marks)
+    grade = assign_grade(average)
 
-    print("\n====== Student Result ======")
-    print("Name:", name)
-    print("Department:", department)
-    print("Semester:", semester)
-    print("Average Marks:", avg)
+    print("Script Name:", script_name)
+    print("Marks:", marks)
+    print("Total Marks:", total)
+    print("Average Marks:", average)
+    print("Maximum Marks:", max(marks))
+    print("Minimum Marks:", min(marks))
     print("Grade:", grade)
-    print("============================")
